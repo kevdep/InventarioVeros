@@ -67,11 +67,11 @@ function generarResultado() {
   texto += `Fecha: ${fecha}\n\n`;
 
   // Stock
-  document.querySelectorAll('input[type="number"]').forEach(i => {
-    if (i.value && i.value > 0) {
-      texto += `${i.dataset.nombre}: ${i.value}\n`;
-    }
-  });
+document.querySelectorAll('input[type="number"]').forEach(i => {
+  if (i.value !== '') {
+    texto += `${i.dataset.nombre}: ${i.value}\n`;
+  }
+});
 
   // Checks (SIEMPRE salen)
   document.querySelectorAll('input[type="checkbox"]').forEach(c => {
@@ -91,3 +91,4 @@ function copiarResultado() {
   msg.style.display = 'block';
   setTimeout(() => msg.style.display = 'none', 2000);
 }
+
