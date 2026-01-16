@@ -100,3 +100,17 @@ function copiarResultado() {
   msg.style.display = 'block';
   setTimeout(() => msg.style.display = 'none', 2000);
 }
+
+function enviarWhatsApp() {
+  const texto = document.getElementById('resultado').value;
+
+  if (!texto) {
+    alert('Primero genera el resultado');
+    return;
+  }
+
+  const textoCodificado = encodeURIComponent(texto);
+  const url = `https://wa.me/?text=${textoCodificado}`;
+
+  window.open(url, '_blank');
+}
