@@ -6,7 +6,10 @@ const productosStock = [
   'Cake de vainilla','Cake de naranja','Cake de yogurt',
   'Leche asada','Suspiro limeño','Torta helada','Combinado',
   'Budín','Brownie','Galleta de Nutella','Galleta de manjar',
-  'Galletón','Muffin de manzana','Mazamorra','Arroz con leche'
+  'Galletón','Muffin de manzana','Mazamorra','Arroz con leche',
+
+  // NUEVOS
+  'Flan','Gelatina','Gelaflan','Pudín','Chicha'
 ];
 
 const productosCheck = [
@@ -66,12 +69,18 @@ function generarResultado() {
 
   texto += `Fecha: ${fecha}\n\n`;
 
-  // Stock
+// Stock (SIEMPRE salen, incluso en 0)
 document.querySelectorAll('input[type="number"]').forEach(i => {
-  if (i.value !== '') {
-    texto += `${i.dataset.nombre}: ${i.value}\n`;
+  const valor = i.value === '' ? 0 : Number(i.value);
+
+  if (i.dataset.nombre === 'Chicha') {
+    texto += `Chicha: ${valor} ${valor === 1 ? 'litro' : 'litros'}\n`;
+  } else {
+    texto += `${i.dataset.nombre}: ${valor}\n`;
   }
 });
+
+
 
   // Checks (SIEMPRE salen)
   document.querySelectorAll('input[type="checkbox"]').forEach(c => {
@@ -91,4 +100,3 @@ function copiarResultado() {
   msg.style.display = 'block';
   setTimeout(() => msg.style.display = 'none', 2000);
 }
-
