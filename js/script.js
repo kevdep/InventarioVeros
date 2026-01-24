@@ -9,7 +9,7 @@ const productosStock = [
   'Galletón','Muffin de manzana','Mazamorra','Arroz con leche',
 
   // NUEVOS
-  'Flan','Gelatina','Gelaflan','Pudín','Chicha'
+  'Gelatina','Gelaflan','Flan','Pudín','Chicha','Papa rellena'
 ];
 
 const productosCheck = [
@@ -18,7 +18,7 @@ const productosCheck = [
   'Cuchara','Cucharitas','Tenedor',
   'Taper 1L','Taper 1/2L','Taper 8oz',
   'Vasos','Bolsas de papel',
-  'Alfajor grande','Alfajor pequeño','Café'
+  'Alfajor grande','Alfajor pequeño','Café','Agua'
 ];
 
 const bolsasOpciones = ['#20','#12','#8','#6','#4'];
@@ -88,18 +88,38 @@ document.querySelectorAll('input[type="number"]').forEach(i => {
   });
 
   document.getElementById('resultado').value = texto.trim();
+
+  const boton = document.getElementById('btnCopiar');
+  boton.disabled = false;
+  boton.innerText = 'Copiar resultado';
 }
 
 /* Copiar */
 function copiarResultado() {
-  const r = document.getElementById('resultado');
-  r.select();
-  document.execCommand('copy');
+  const texto = document.getElementById('resultado').value;
+  const boton = document.getElementById('btnCopiar');
 
-  const msg = document.getElementById('copiado');
-  msg.style.display = 'block';
-  setTimeout(() => msg.style.display = 'none', 2000);
+  if (!texto) {
+    alert('Primero genera el resultado');
+    return;
+  }
+
+  navigator.clipboard.writeText(texto).then(() => {
+    const msg = document.getElementById('copiado');
+    msg.style.display = 'block';
+    msg.style.color = '#28a745'; // verde satisfacción 😌
+
+    // deshabilitar botón
+    boton.disabled = true;
+    boton.innerText = 'Copiado ✔';
+
+    setTimeout(() => msg.style.display = 'none', 2000);
+  }).catch(() => {
+    alert('No se pudo copiar');
+  });
 }
+
+
 
 function enviarWhatsApp() {
   const texto = document.getElementById('resultado').value;
