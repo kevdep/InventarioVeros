@@ -1,27 +1,27 @@
 const productosStock = [
-  'Empanada de pollo','Empanada de lomo','Empanada hawaiana','Empanada jamón y queso',
-  'Tres leches','Torta de chocolate','Tartaleta','César',
-  'Pye de limón','Pye de manzana','Crema volteada','Tiramisú',
-  'Carrot cake','Red velvet','Cake imperial',
-  'Cake de vainilla','Cake de naranja','Cake de yogurt',
-  'Leche asada','Suspiro limeño','Torta helada','Combinado',
-  'Budín','Brownie','Galleta de Nutella','Galleta de manjar',
-  'Galletón','Muffin de manzana','Mazamorra','Arroz con leche',
+  'Empanada de pollo', 'Empanada de lomo', 'Empanada hawaiana', 'Empanada jamón y queso',
+  'Tres leches', 'Torta de chocolate', 'Tartaleta', 'César',
+  'Pye de limón', 'Pye de manzana', 'Crema volteada', 'Tiramisú',
+  'Carrot cake', 'Red velvet', 'Cake imperial',
+  'Cake de vainilla', 'Cake de naranja', 'Cake de yogurt',
+  'Leche asada', 'Suspiro limeño', 'Torta helada', 'Combinado',
+  'Budín', 'Brownie', 'Galleta de Nutella', 'Galleta de manjar',
+  'Galletón', 'Muffin de manzana', 'Mazamorra', 'Arroz con leche',
 
   // NUEVOS
-  'Gelatina','Gelaflan','Flan','Pudín','Chicha','Papa rellena'
+  'Gelatina', 'Gelaflan', 'Flan', 'Pudín', 'Chicha', 'Papa rellena'
 ];
 
 const productosCheck = [
   'Cheesecake',
-  'Delicia de maracuyá','Delicia de lúcuma','Gaseosas',
-  'Cuchara','Cucharitas','Tenedor',
-  'Taper 1L','Taper 1/2L','Taper 8oz',
-  'Vasos','Bolsas de papel',
-  'Alfajor grande','Alfajor pequeño','Café','Agua'
+  'Delicia de maracuyá', 'Delicia de lúcuma', 'Gaseosas',
+  'Cuchara', 'Cucharitas', 'Tenedor',
+  'Taper 1L', 'Taper 1/2L', 'Taper 8oz',
+  'Vasos', 'Bolsas de papel',
+  'Alfajor grande', 'Alfajor pequeño', 'Café', 'Agua'
 ];
 
-const bolsasOpciones = ['#20','#12','#8','#6','#4'];
+const bolsasOpciones = ['#20', '#12', '#8', '#6', '#4'];
 const inventario = document.getElementById('inventario');
 
 /* Productos con stock */
@@ -69,16 +69,16 @@ function generarResultado() {
 
   texto += `Fecha: ${fecha}\n\n`;
 
-// Stock (SIEMPRE salen, incluso en 0)
-document.querySelectorAll('input[type="number"]').forEach(i => {
-  const valor = i.value === '' ? 0 : Number(i.value);
+  // Stock (SIEMPRE salen, incluso en 0)
+  document.querySelectorAll('input[type="number"]').forEach(i => {
+    const valor = i.value === '' ? 0 : Number(i.value);
 
-  if (i.dataset.nombre === 'Chicha') {
-    texto += `Chicha: ${valor} ${valor === 1 ? 'litro' : 'litros'}\n`;
-  } else {
-    texto += `${i.dataset.nombre}: ${valor}\n`;
-  }
-});
+    if (i.dataset.nombre === 'Chicha') {
+      texto += `Chicha: ${valor} ${valor === 1 ? 'litro' : 'litros'}\n`;
+    } else {
+      texto += `${i.dataset.nombre}: ${valor}\n`;
+    }
+  });
 
 
 
@@ -133,4 +133,93 @@ function enviarWhatsApp() {
   const url = `https://wa.me/?text=${textoCodificado}`;
 
   window.open(url, '_blank');
+}
+
+async function generarImagen() {
+
+  const tabla1 = document.getElementById('tabla1');
+  const tabla2 = document.getElementById('tabla2');
+
+  tabla1.innerHTML = '';
+  tabla2.innerHTML = '';
+
+  // FECHA
+  document.getElementById('fechaImagen').innerText =
+    'Fecha: ' + new Date().toLocaleDateString('es-PE');
+
+  // STOCK
+  document.querySelectorAll('input[type="number"]').forEach(i => {
+
+    const valor = i.value === '' ? 0 : i.value;
+
+    tabla1.innerHTML += `
+    <tr>
+
+      <td style="
+        border:1px solid black;
+        padding:2px 6px;
+        color:black;
+        font-size:14px;
+        line-height:1.1;
+      ">
+        ${i.dataset.nombre}
+      </td>
+
+      <td style="
+        border:1px solid black;
+        padding:2px 6px;
+        color:black;
+        text-align:center;
+        font-size:14px;
+        line-height:1.1;
+      ">
+        ${valor}
+      </td>
+
+    </tr>
+  `;
+  });
+
+  // CHECKS
+  document.querySelectorAll('input[type="checkbox"]').forEach(c => {
+
+    tabla2.innerHTML += `
+    <tr>
+
+      <td style="
+        border:1px solid black;
+        padding:2px 6px;
+        color:black;
+        font-size:14px;
+        line-height:1.1;
+      ">
+        ${c.dataset.nombre}
+      </td>
+
+      <td style="
+        border:1px solid black;
+        padding:2px 6px;
+        font-weight:bold;
+        color:${c.checked ? 'green' : 'red'};
+        text-align:center;
+        font-size:14px;
+        line-height:1.1;
+      ">
+        ${c.checked ? '✔' : '✘'}
+      </td>
+
+    </tr>
+  `;
+  });
+
+  // CAPTURA
+  const elemento = document.getElementById('plantillaImagen');
+
+  const canvas = await html2canvas(elemento);
+
+  // DESCARGAR
+  const link = document.createElement('a');
+  link.download = 'inventario.png';
+  link.href = canvas.toDataURL();
+  link.click();
 }
