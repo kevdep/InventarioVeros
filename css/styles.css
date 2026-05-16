@@ -72,3 +72,10 @@ input[type="number"]:-webkit-autofill:focus {
   transition: background-color 9999s ease-in-out 0s;
 }
 
+.plantillaImagen {
+  width: 800px;
+  position: absolute;
+  left: -9999px;
+  color: black;
+  font-family: Arial;
+}
