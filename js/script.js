@@ -6,10 +6,10 @@ const productosStock = [
   'Cake de vainilla', 'Cake de naranja', 'Cake de yogurt',
   'Leche asada', 'Suspiro limeño', 'Torta helada', 'Combinado',
   'Budín', 'Brownie', 'Galleta de Nutella', 'Galleta de manjar',
-  'Galletón', 'Muffin de manzana', 'Mazamorra', 'Arroz con leche',
+  'Galletón', 'Galleta de pistacho', 'Galleta Red Velvet', 'Muffin de manzana', 'Mazamorra', 'Arroz con leche',
 
   // NUEVOS
-  'Gelatina', 'Gelaflan', 'Flan', 'Pudín', 'Chicha', 'Papa rellena'
+  'Gelatina', 'Gelaflan', 'Flan', 'Pudín', 'Chicha', 'Papa rellena', 'Bruselina'
 ];
 
 const productosCheck = [
