@@ -21,7 +21,7 @@ const productosCheck = [
   'Alfajor grande', 'Alfajor pequeño', 'Café', 'Agua'
 ];
 
-const bolsasOpciones = ['#20', '#12', '#8', '#6', '#4'];
+const bolsasOpciones = ['#20', '#12', '#8', '#6', '#4', '#2'];
 const inventario = document.getElementById('inventario');
 
 /* Productos con stock */
